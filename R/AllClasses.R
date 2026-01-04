@@ -1,9 +1,9 @@
 setClass("BaseGroupV04", 
          slot = 
-           c(ome_attributes = "list"))
+           c(attr = "list"))
 
 # validation
-.validate_BaseGroupV04 <- function(object, param = 1)
+.validate_BaseGroupV04 <- function(object)
 {
   
 }

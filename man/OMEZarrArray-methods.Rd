@@ -6,7 +6,7 @@
 \alias{dim,OMEZarrArray-method}
 \alias{type,OMEZarrArray-method}
 \alias{length,OMEZarrArray-method}
-\alias{OMEZarrArray}
+\alias{read_image}
 \title{Methods for OMEZarrArray}
 \usage{
 \S4method{[[}{OMEZarrArray,numeric}(x, i)
@@ -17,7 +17,7 @@
 
 \S4method{length}{OMEZarrArray}(x)
 
-OMEZarrArray(meta, levels)
+read_image(group, s3_client = NULL)
 }
 \arguments{
 \item{x}{An OMEZarrArray object}
@@ -59,7 +59,7 @@ for \code{OMEZarrArray} objects
 
 \item \code{length(OMEZarrArray)}: length of an OMEZarrArray
 
-\item \code{OMEZarrArray()}: OMEZarrArray constructor method
+\item \code{read_image()}: OMEZarrArray constructor method
 
 A function for creating objects of OMEZarrArray class
 

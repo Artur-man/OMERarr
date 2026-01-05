@@ -60,16 +60,21 @@ setMethod("length", signature = "OMEZarrArray", function(x) length(x@levels))
 #' starting with 1
 #'
 #' @importFrom S4Vectors new2
+#' @importFrom Rarr read_zarr_array
 #' @export
 #' @return An OMEZarrArray object
-OMEZarrArray <- function(group, s3_client = NULL) {
+read_image <- function(group, s3_client = NULL){
   
   # read metadata
-  meta <- Rarr::read_zarr_attribute(zarr_path = group, 
-                                    s3_client = s3_client)
+  meta <- read_ome_metadata(group = group, 
+                            s3_client = s3_client)
   
   # read levels
-  levels <- 2
+  datasets <- .get_multiscale_datasets(meta) 
+  levels <- lapply(datasets, function(dataset){
+    Rarr::read_zarr_array(zarr_array_path = file.path(group, dataset), 
+                         s3_client = s3_client)
+  })
   
   # construct class
   S4Vectors::new2("OMEZarrArray", meta = meta, levels = levels)

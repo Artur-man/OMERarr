@@ -16,6 +16,7 @@ vignette: |
 ```{r load-libs}
 library(OMERarr)
 library(Rarr)
+library(EBImage)
 ```
 
 # Introduction
@@ -33,10 +34,28 @@ BiocManager::install("OMERarr")
 
 # Usage
 
-```{r install-BiocManager, eval = FALSE}
+Read remote data
+
+```{r read s3, eval = FALSE}
 chick <- "https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.3/9836842.zarr/"
 chich_array <- read_zarr_array(zarr_array_path = file.path(chick, "3"))
 chich_meta <- read_zarr_attributes(zarr_path = chick, s3_client = Rarr:::.create_s3_client(chick))
+```
+
+## Write multiscale image
+
+```{r write-multiscale}
+# image
+img_file <- system.file("images", "sample.png", package="EBImage")
+img_array <- readImage(img_file)
+
+# zarr store
+store <- tempfile(fileext = ".zarr")
+
+# write
+write_image(img_array, 
+            group = store, 
+            storage_options = list(chunk_dim = c(64,64)))
 ```
 
 # Session info

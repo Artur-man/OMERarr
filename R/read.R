@@ -6,7 +6,7 @@
 #'
 #' Methods for \code{OMEZarrArray} objects
 #'
-#' @param x An OMEZarrArray object
+#' @param x,object An OMEZarrArray object
 #' @param i Depends on the usage
 #' \describe{
 #'  \item{\code{[[}}{
@@ -50,6 +50,11 @@ setMethod("type", "OMEZarrArray", function(x) type(x[[1]]))
 #' @export
 #' @returns length of OMEZarrArray object
 setMethod("length", signature = "OMEZarrArray", function(x) length(x@levels))
+
+#' @describeIn OMEZarrArray-methods length of an OMEZarrArray
+#' @export
+#' @returns length of OMEZarrArray object
+setMethod("meta", signature = "OMEZarrArray", function(object) object@meta)
 
 #' @describeIn OMEZarrArray-methods OMEZarrArray constructor method
 #'

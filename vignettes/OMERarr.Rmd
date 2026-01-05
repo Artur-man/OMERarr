@@ -41,7 +41,7 @@ chick <- "https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.3/9836842.zarr/"
 # chich_array <- read_zarr_array(zarr_array_path = file.path(chick, "3"))
 # chich_meta <- read_zarr_attributes(zarr_path = chick, s3_client = Rarr:::.create_s3_client(chick))
 img_array <- read_image(group = chick, s3_client = Rarr:::.create_s3_client(chick))
-# chick_meta <- read_ome_metadata(group = chick, s3_client = Rarr:::.create_s3_client(chick))
+chick_meta <- read_ome_metadata(group = chick, s3_client = Rarr:::.create_s3_client(chick))
 ```
 
 ## Write multiscale image

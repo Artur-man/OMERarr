@@ -7,3 +7,7 @@ read_ome_metadata <- function(group, s3_client = NULL) {
 .get_multiscale_datasets <- function(meta) {
   meta$multiscales$datasets[[1]]$path
 }
+
+.get_axes <- function(meta) {
+  meta$multiscales$axes[[1]]
+}

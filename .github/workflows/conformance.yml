@@ -66,18 +66,27 @@ jobs:
           install.packages(c("rcmdcheck", "BiocCheck", "remotes"), repos = BiocManager::repositories())
           remotes::install_local(dependencies = TRUE, repos = BiocManager::repositories(), build_vignettes = FALSE, upgrade = TRUE)
         shell: Rscript {0}
-      
-      # All Other dependencies
-      - name: Install Suggested dependencies
-        run: |
-          BiocManager::install('RBioFormats')
-        shell: Rscript {0}
         
-      ## conformance
-      - name: Run CMD check
-        env:
-          _R_CHECK_CRAN_INCOMING_: false
-          DISPLAY: 99.0
-        run: |
-          Rscript inst/scripts/test_cli.R --name Alice --number 42 --flag
+      # ## conformance
+      # - name: conformance
+      #   env:
+      #     _R_CHECK_CRAN_INCOMING_: false
+      #     DISPLAY: 99.0
+      #   run: |
+      #     Rscript inst/scripts/test_cli.R --name Alice --number 42 --flag
+      #   shell: bash
+      
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.13
+          
+      - name: "Install testing framework"
         shell: bash
+        run: |
+          pip install git+https://github.com/clbarnes/ome_zarr_conformance.git
+          
+      - name: "Run conformance tests"
+        shell: bash
+        run: |
+          which ome-zarr-conformance

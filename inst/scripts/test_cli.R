@@ -1,7 +1,9 @@
 #!/usr/bin/env Rscript
 
-# ---- Simple CLI test script ----
+# libraries
+library(OMERarr)
 
+# ---- Simple CLI test script ----
 args <- commandArgs(trailingOnly = TRUE)
 
 if (length(args) == 0 || "--help" %in% args) {

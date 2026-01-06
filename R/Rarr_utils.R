@@ -6,6 +6,9 @@
 #' @param name name of the group
 #' @param version zarr version
 #'
+#' @importFrom cli cli_abort
+#' @importFrom utils tail
+#' 
 #' @return `NULL`
 #'
 #' @noRd
@@ -22,7 +25,7 @@ create_zarr_group <- function(store, name, version = "v2") {
       function(x) paste(split_name[seq_len(x)], collapse = "/"),
       FUN.VALUE = character(1)
     )
-    split_name <- rev(tail(split_name, 2))
+    split_name <- rev(utils::tail(split_name, 2))
     if (!dir.exists(file.path(store, split_name[2]))) {
       create_zarr_group(store = store, name = split_name[2])
     }
@@ -37,9 +40,9 @@ create_zarr_group <- function(store, name, version = "v2") {
       )
     },
     v3 = {
-      cli_abort("Currently only zarr v2 is supported!")
+      cli::cli_abort("Currently only zarr v2 is supported!")
     },
-    cli_abort("Only zarr v2 is supported. Use version = 'v2'")
+    cli::cli_abort("Only zarr v2 is supported. Use version = 'v2'")
   )
 }
 

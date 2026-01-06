@@ -16,6 +16,8 @@
 #'
 #' @rdname write_image
 #' 
+#' @importFrom stats setNames
+#' 
 #' @export
 write_image <- function(image, 
                         group="/", 
@@ -40,6 +42,8 @@ write_image <- function(image,
 #' 
 #' Generate a downsampled pyramid of images.
 #'
+#' @importFrom EBImage resize
+#' 
 #' @inheritParams write_image
 #' 
 #' @noRd
@@ -69,7 +73,7 @@ write_image <- function(image,
                           format = format)
   
   # get x y dimensions for EBImage
-  dim_image <- setNames(dim(image), axes)
+  dim_image <- stats::setNames(dim(image), axes)
   dim_image <- dim_image[c("x", "y")]
   
   # downscale image

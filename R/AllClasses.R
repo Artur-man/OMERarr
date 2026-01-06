@@ -1,3 +1,5 @@
+#' @importFrom methods new
+
 .OMEZarrArray <- setClass(
   Class = "OMEZarrArray",
   slots = c(
@@ -6,7 +8,7 @@
   )
 )
 
-#' @rdname misc
+#' @importFrom S4Vectors coolcat
 setMethod("show", 
           "OMEZarrArray", 
           function(object) {

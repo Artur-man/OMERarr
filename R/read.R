@@ -21,6 +21,8 @@
 #'
 #' @aliases
 #' [[,OMEZarrArray,numeric-method
+#' meta
+#' meta,ImageArray-method
 #'
 NULL
 
@@ -43,6 +45,7 @@ setMethod("dim", "OMEZarrArray", function(x) dim(x[[1]]))
 
 #' @describeIn OMEZarrArray-methods dimensions of an OMEZarrArray
 #' @export
+#' @importFrom DelayedArray type
 #' @returns type of OMEZarrArray object
 setMethod("type", "OMEZarrArray", function(x) type(x[[1]]))
 
@@ -60,10 +63,10 @@ setMethod("meta", signature = "OMEZarrArray", function(object) object@meta)
 #'
 #' A function for creating objects of OMEZarrArray class
 #'
-#' @param meta the metadata of the OMEZarrArray object. 
-#' @param levels levels of the pyramid image, typically a vector of integers
-#' starting with 1
-#'
+#' @param group description
+#' @param s3_client Object created by \code{paws.storage::s3()}. 
+#' Only required for a file on S3. Leave as NULL for a file on local storage.
+#' 
 #' @importFrom S4Vectors new2
 #' @importFrom Rarr read_zarr_array
 #' @export
